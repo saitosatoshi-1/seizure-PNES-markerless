@@ -23,6 +23,7 @@ if not out.isOpened():
     raise RuntimeError('VideoWriter does not open')
 
 #動画から1フレームずつ読み込む
+frame_idx = 0
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -38,6 +39,7 @@ while True:
     #VideoWriter.write() は「1枚の画像を、動画の後ろに追加する」
     #while でフレームをfeedし続ける限り、動画が自動的にできる
     out.write(vis)
+    frame_idx += 1
 
 cap.release()
 out.release()
