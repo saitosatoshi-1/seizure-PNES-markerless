@@ -7,7 +7,6 @@ QuickTime-compatible video before running skeletal or silhouette analysis.
 
 import cv2, os, numpy as np
 
-
 # ====== Input video ======
 video_path = '/content/*****.mp4'
 if not os.path.exists(video_path):
@@ -30,13 +29,11 @@ height, width = test_frame.shape[:2]
 print(f"fps={orig_fps:.3f}, frames={frame_count}, size={width}x{height}")
 
 # ====== Output settings ======
-target_fps = min(20.0, orig_fps)
-frame_interval = max(1, int(round(orig_fps / target_fps)))
-out_fps = max(1, int(round(orig_fps / frame_interval)))
+target_fps = 30.0
 
-out_path_tmp = '/content/FBTCS_tmp.mp4'
+out_path_tmp = '/content/****.mp4'
 fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
-out = cv2.VideoWriter(out_path_tmp, fourcc, out_fps, (width, height))
+out = cv2.VideoWriter(out_path_tmp, fourcc, target_fps, (width, height))
 
 if not out.isOpened():
     raise RuntimeError('Failed to open VideoWriter.')
@@ -57,7 +54,7 @@ out.release()
 print("Temporary mp4v file saved:", out_path_tmp)
 
 # ====== Re-encode to QuickTime-compatible format ======
-out_path_qt = '/content/FBTCS_silhouette_qt.mp4'
+out_path_qt = '/content/****.mp4'
 os.system(
     f"ffmpeg -y -i {out_path_tmp} -vcodec libx264 -pix_fmt yuv420p "
     f"-profile:v baseline -level 3.0 -movflags +faststart {out_path_qt}"
