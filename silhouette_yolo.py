@@ -27,6 +27,10 @@ out = cv2.VideoWriter(out_path, fourcc, orig_fps, (width, height))
 if not out.isOpened():
     raise RuntimeError('VideoWriter does not open')
 
+# ====== YOLO models ======
+det_model = YOLO('yolo11s.pt')       # keypoint detection
+seg_model = YOLO('yolo11s-seg.pt')   # human segmentation
+
 # Frame-by-frame processing
 frame_idx = 0
 while True:
