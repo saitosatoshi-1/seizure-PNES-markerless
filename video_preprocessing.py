@@ -6,7 +6,7 @@ QuickTime-compatible video before running skeletal or silhouette analysis.
 """
 
 import cv2, os, numpy as np
-from ultralytics import YOLO
+
 
 # ====== Input video ======
 video_path = '/content/*****.mp4'
