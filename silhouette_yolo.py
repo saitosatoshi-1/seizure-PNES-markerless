@@ -1,3 +1,10 @@
+"""
+YOLO segmentation is applied to detect the human silhouette only.
+The model estimates masks for the person class exclusively; 
+no background objects are segmented. This ensures clean inputs for
+motion analysis (skeleton, silhouette, optical flow).
+"""
+
 import cv2, os
 
 video_path = '/content/****.mp4'
